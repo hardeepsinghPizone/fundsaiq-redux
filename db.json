@@ -1,0 +1,76 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Samsung M 40",
+            "color": "black",
+            "price": 15000,
+            "category": "mobile",
+            "brand": "Samsung",
+            "photo": "https://www.notebookcheck.net/uploads/tx_nbc2/SamsungGalaxyM40.JPG"
+        },
+        {
+            "id": 2,
+            "name": "Samsung F20",
+            "color": "white",
+            "price": 50000,
+            "category": "Mobile",
+            "brand": "Samsung",
+            "photo": "https://www.dpreview.com/files/p/articles/5877450512/Samsung-Galaxy-A9-2018_SM-A920FN_Lemonade-Blue_180.jpeg"
+        },
+        {
+            "id": 3,
+            "name": "T-shirt",
+            "color": "red",
+            "price": 5000,
+            "category": "cloths",
+            "brand": "Nike",
+            "photo": "https://assets.myntassets.com/h_1440,q_100,w_1080/v1/assets/images/9345297/2019/6/20/93eb18cf-1e02-4fef-9d40-bd65859c3a4c1561012042571-Roadster-Men-Maroon-Striped-Polo-Collar-T-shirt-380156101204-1.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Sports Shoes",
+            "color": "red and black",
+            "price": 8000,
+            "category": "rebook",
+            "brand": "Nike",
+            "photo": "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/17894204/2022/4/25/5b82380c-a861-46fc-b4ff-afeafbcfb0d91650868454464-US-Polo-Assn-Men-Sports-Shoes-9811650868454137-1.jpg"
+        },
+        {
+            "id": 5,
+            "name": "530 laptop",
+            "color": "white",
+            "price": 88000,
+            "category": "laptop",
+            "brand": "HP",
+            "photo": "https://i.dell.com/is/image/DellContent//content/dam/ss2/product-images/dell-client-products/notebooks/latitude-notebooks/13-3320/media-gallery/peripherals_laptop_latitude_3320_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&wid=3337&hei=2417&qlt=100,0&resMode=sharp2&size=3337,2417"
+        },
+        {
+            "id": 6,
+            "name": "earphone - 10",
+            "color": "green",
+            "price": 800,
+            "category": "earphone",
+            "brand": "mivi",
+            "photo": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MYMC2?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1601053171000"
+        },
+        {
+            "id": 7,
+            "name": "black shirt",
+            "color": "black",
+            "price": 1800,
+            "category": "cloths",
+            "brand": "tommy",
+            "photo": "https://assets.ajio.com/medias/sys_master/root/20210403/ZuMQ/6068643df997dd7b645d4c3d/-473Wx593H-461118551-black-MODEL.jpg"
+        },
+        {
+            "id": 8,
+            "name": "green shirt",
+            "color": "green",
+            "price": 1900,
+            "category": "cloths",
+            "brand": "tommy",
+            "photo": "https://rukminim1.flixcart.com/image/714/857/kfoapow0-0/shirt/f/3/h/m-hlsh008879-highlander-original-imafw2ggvf6uxrhq.jpeg?q=50"
+        }
+    ]
+}
