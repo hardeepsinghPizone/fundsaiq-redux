@@ -1,29 +1,18 @@
+import React , {useEffect} from 'react';
 import { useDispatch,useSelector } from "react-redux";
-import { getActivePassive, getAlertSettings, getAlertsNotifications, getAllSettings,getFundAlerts,getFundMatchedCountry,getFundSummeryDetails,getMarketInsights,getMarketUniverse,getMyFunds,getNewsForFund,getPageSessions,getPreferences,getPreferencesData, getProfile, getSearch, getSearchGrowthFunds, getSendAlertsEmail, getSession, getSummeryFundsBatch, getTopFundGrowth, getUsersession } from "../redux/productAction";
-// import { useSelector } from "react-redux";
-// import { useEffect } from "react";
-
+import { getActivePassive, getAlertSettings, getAlertsNotifications, getAllSettings,getFundAlerts,getFundMatchedCountry,getFundSummeryDetails,getMarketInsights,getMarketUniverse,getMyFunds,getNewsForFund,getPageSessions,getPreferences,getPreferencesData, getProfile, getSearch, getSearchGrowthFunds, getSendAlertsEmail, getSession, getSummeryFundsBatch, getTopFundGrowth, getUsersession } from "../redux/sagaAction";
+import {getAllSetting} from '../redux/apiState'
 function Main() {
   const dispatch = useDispatch();
-  let data = useSelector((state) => state.productData);
-//   let data = [
-//     {
-//     id: "0001",
-//     type: "donut",
-//     name: "Cake",
-//     image: {
-//       url: "images/0001.jpg",
-//       width: 200,
-//       height: 200,
-//     },
-//     thumbnail: {
-//       url: "images/thumbnails/0001.jpg",
-//       width: 32,
-//       height: 32,
-//     },
-//   },
-// ];
-  
+
+  // redux thunk 
+  // let data = useSelector((state) => state.api.apiData);
+  // redux saga 
+  let data = useSelector((state) => state.reduxSagaReducer);
+  useEffect(()=>{
+  //  dispatch(getAllSetting('478affd9-87fc-4743-9491-d6696dcdd83b'));
+   console.log(data)
+  },[dispatch])
   return (<>
     <div>
       <h1 className="API-heading">All Get APIs</h1>

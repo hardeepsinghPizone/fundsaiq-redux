@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 // import { cartData } from './reducer'
-import {productData} from './productReducer'
+import {reduxSagaReducer} from './sagaReducer'
 export default combineReducers({
     // cartData,
-    productData
+    reduxSagaReducer
 })
