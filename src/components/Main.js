@@ -1,12 +1,9 @@
 import React , {useEffect} from 'react';
 import { useDispatch,useSelector } from "react-redux";
 import { getActivePassive, getAlertSettings, getAlertsNotifications, getAllSettings,getFundAlerts,getFundMatchedCountry,getFundSummeryDetails,getMarketInsights,getMarketUniverse,getMyFunds,getNewsForFund,getPageSessions,getPreferences,getPreferencesData, getProfile, getSearch, getSearchGrowthFunds, getSendAlertsEmail, getSession, getSummeryFundsBatch, getTopFundGrowth, getUsersession } from "../redux/sagaAction";
-import {getAllSetting} from '../redux/apiState'
+
 function Main() {
   const dispatch = useDispatch();
-
-  // redux thunk 
-  // let data = useSelector((state) => state.api.apiData);
   // redux saga 
   let data = useSelector((state) => state.reduxSagaReducer);
   useEffect(()=>{
