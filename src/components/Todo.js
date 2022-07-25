@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToDoList, removeToDoList, editToDoList } from "../redux/apiState";
+import { addToDoList, removeToDoList, editToDoList, undo } from "../redux/apiState";
 const Todo = () => {
   // redux thunk
   let listData = useSelector((state) => state.api.listData);
+  let prevData = useSelector((state) => state.api.prevData);
   const dispatch = useDispatch();
   const [inputData, setInputData] = useState("");
   const [isEdit, setIsEdit] = useState(false);
+  const [editDataId, setEditDataId] = useState("");
   const [editData, setEditData] = useState("");
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -37,12 +39,29 @@ const Todo = () => {
                 name="add"
                 id="add"
                 onChange={(e) => {
-                  setIsEdit(false);
                   const value = e.target.value;
+                  if(isEdit){
+                    setEditData(value);
+                    
+                  }
                   setInputData(value);
+                 
                 }}
               />
-              <button
+              {isEdit?  <button
+                class="btn btn-dark"
+                onClick={(e) => {
+                  e.preventDefault();
+                    setError(false);
+                    dispatch(editToDoList({
+                      id: editDataId.id,
+                      todo:editData}));
+                    setInputData("");
+                    setIsEdit(false);
+                }}
+              >
+                Update
+              </button>: <button
                 class="btn btn-dark"
                 onClick={(e) => {
                   e.preventDefault();
@@ -56,18 +75,13 @@ const Todo = () => {
                 }}
               >
                 Add
-              </button>
+              </button>}
+             
               <button
                 class="btn btn-dark"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (inputData === "") {
-                    setError(true);
-                  } else {
-                    setError(false);
-                    dispatch(addToDoList(inputData));
-                    setInputData("");
-                  }
+                    dispatch(undo());
                 }}
               >
                 Undo
@@ -103,11 +117,10 @@ const Todo = () => {
                   style={{ position: "absolute", left: "86%" }}
                   onClick={() => {
                     setIsEdit(true);
+                    setEditDataId({
+                      id:item.id,
+                    })
                     setEditData(item.todo);
-                    dispatch(editToDoList({
-                        id:item.id,
-                        todo:inputData
-                    }))
                   }}
                 />
                 <i
