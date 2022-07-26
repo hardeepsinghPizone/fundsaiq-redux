@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToDoList, removeToDoList, editToDoList, undo } from "../redux/apiState";
+import { addToDoList, removeToDoList, editToDoList, emptyTodo, emptyUndo } from "../redux/apiState";
 const Todo = () => {
   // redux thunk
   let listData = useSelector((state) => state.api.listData);
-  let prevData = useSelector((state) => state.api.prevData);
+  let history = useSelector((state) => state.api.history);
   const dispatch = useDispatch();
   const [inputData, setInputData] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [editDataId, setEditDataId] = useState("");
   const [editData, setEditData] = useState("");
   const [error, setError] = useState(false);
+  const [isUndo, setIsUndo] = useState(false);
+  const [pressUndo,setPressUndo] = useState(1);
   useEffect(() => {
-    console.log(listData);
-  }, [listData]);
+    // console.log(listData);
+    console.log(history);
+    // history[history.length - 1]?.map(item=>{
+    //   console.log(item)
+    // })
+  }, [listData,history]);
   return (
     <div
       style={{
@@ -40,6 +46,7 @@ const Todo = () => {
                 id="add"
                 onChange={(e) => {
                   const value = e.target.value;
+                  setIsUndo(false);
                   if(isEdit){
                     setEditData(value);
                     
@@ -69,6 +76,7 @@ const Todo = () => {
                     setError(true);
                   } else {
                     setError(false);
+                    setIsUndo(false);
                     dispatch(addToDoList(inputData));
                     setInputData("");
                   }
@@ -81,7 +89,15 @@ const Todo = () => {
                 class="btn btn-dark"
                 onClick={(e) => {
                   e.preventDefault();
-                    dispatch(undo());
+                  setIsUndo(true);
+                  setPressUndo(pressUndo + 1)
+                  var count = pressUndo + 1
+                  if(history[history.length - count] === undefined){
+                     setIsUndo(false);
+                     setPressUndo(1);
+                     dispatch(emptyUndo());
+                     dispatch(emptyTodo());
+                  }
                 }}
               >
                 Undo
@@ -105,7 +121,32 @@ const Todo = () => {
         </header>
         {/*  LIST  */}
         <ul className="list-group todos mx-auto text-light">
-          {listData.map((item) => {
+          {isUndo?history[history.length - pressUndo]?.map((item) => {
+            return (
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center"
+                key={item.id}
+              >
+                <span>{item.todo}</span>
+                <i
+                  class="fa-solid fa-pen-to-square delete"
+                  style={{ position: "absolute", left: "86%" }}
+                  onClick={() => {
+                    setIsEdit(true);
+                    setEditDataId({
+                      id:item.id,
+                    })
+                    setEditData(item.todo);
+                  }}
+                />
+                <i
+                  className="far fa-trash-alt delete"
+                  onClick={() => {
+                    dispatch(removeToDoList(item.id));
+                  }}
+                />
+              </li>
+            )}):listData?.map((item) => {
             return (
               <li
                 className="list-group-item d-flex justify-content-between align-items-center"

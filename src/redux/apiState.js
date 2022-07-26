@@ -32,8 +32,28 @@ export const editToDoList = createAsyncThunk(
         // return formattedResponse;
     }
 )
-export const undo = createAsyncThunk(
-    'todo/undo',
+export const emptyTodo = createAsyncThunk(
+    'todo/emptyTodo',
+    async (data) => {
+        // console.log(data)
+        return data
+        // const response = await fetch(`https://qapi.fundsaiq.com/getAllSettings/${data}`);
+        // const formattedResponse = await response.json();
+        // return formattedResponse;
+    }
+)
+export const emptyUndo = createAsyncThunk(
+    'todo/emptyUndo',
+    async (data) => {
+        // console.log(data)
+        return data
+        // const response = await fetch(`https://qapi.fundsaiq.com/getAllSettings/${data}`);
+        // const formattedResponse = await response.json();
+        // return formattedResponse;
+    }
+)
+export const addAfterUndo = createAsyncThunk(
+    'todo/addAfterUndo',
     async (data) => {
         // console.log(data)
         return data
@@ -54,12 +74,13 @@ export const apiSlice = createSlice({
         [addToDoList.fulfilled]: (state,action) => {
          var oldData = state.listData
          state.listData = [...oldData,action.payload];
-         state.listData = [...oldData,action.payload]
+         state.history.push([...oldData,action.payload]);
          state.isLoading = false;
         },
         [removeToDoList.fulfilled]: (state,action) => {
          var oldData = state.listData.filter((elem)=>elem.id !== action.payload)
          state.listData = [...oldData];
+         state.history.push([...oldData])
          state.isLoading = false;
         },
         [editToDoList.fulfilled]: (state,action) => {
@@ -71,13 +92,15 @@ export const apiSlice = createSlice({
          })
          
          state.listData = [...oldData];
+         state.history.push(state.listData)
          state.isLoading = false;
         },
-        [undo.fulfilled]: (state,action) => {
-            var oldData = state.listData
-            const previous = oldData[oldData.length - 1]
-            const newPast = oldData.slice(0, oldData.length - 1)
-            state.listData = [...newPast]
+        [emptyTodo.fulfilled]: (state,action) => {
+            state.listData = [];
+         
+        },
+        [addAfterUndo.fulfilled]: (state,action) => {
+            state.listData = action.payload;
          
         },
     }
