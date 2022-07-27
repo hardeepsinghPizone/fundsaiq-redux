@@ -143,6 +143,7 @@ const Todo = () => {
                 <i
                   className="far fa-trash-alt delete"
                   onClick={() => {
+                    setIsUndo(false);
                     dispatch(removeToDoList(item.id));
                   }}
                 />
