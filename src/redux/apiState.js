@@ -96,12 +96,17 @@ export const apiSlice = createSlice({
          state.isLoading = false;
         },
         [emptyTodo.fulfilled]: (state,action) => {
-            state.listData = action.payload;
-         
+            if(action.payload === undefined){
+                state.listData = []
+                console.log('action.payload === undefined:true');
+            } else {
+                state.listData = action.payload;
+            }
+           
+            console.log(action.payload);
         },
         [emptyUndo.fulfilled]: (state,action) => {
             state.history = []
-         
         },
     }
 });
