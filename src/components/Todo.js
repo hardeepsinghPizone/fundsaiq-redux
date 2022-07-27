@@ -96,8 +96,9 @@ const Todo = () => {
                      setIsUndo(false);
                      setPressUndo(1);
                      dispatch(emptyUndo());
-                     dispatch(emptyTodo());
+                    
                   }
+                  dispatch(emptyTodo(history[history.length - count]));
                 }}
               >
                 Undo
